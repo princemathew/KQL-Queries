@@ -1,1 +1,1 @@
-# Sentinel-Queries
+# KQL-Queries
