@@ -1,0 +1,10 @@
+// Find all IP Addresses which are using the same login sessions
+// This will be useful while investigating Anomalous Token alerts
+
+AADSignInEventsBeta
+| where AccountUpn contains "" //give the account name of the impacted user
+| where isnotempty( SessionId)
+| summarize AttackerIPs = make_set(IPAddress), UserAgents = make_set(UserAgent),
+    StartTime = min(Timestamp), EndTime = max(Timestamp), 
+    Applications = make_set(Application) by SessionId
+| where IP contains "" // give the IP we got from Anomalous token alert
