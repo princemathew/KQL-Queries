@@ -1,4 +1,4 @@
-// Find all IP Addresses which are using the same login sessions
+// Find all IP Addresses that are using the same login sessions
 // This will be useful while investigating Anomalous Token alerts
 
 AADSignInEventsBeta
@@ -7,4 +7,4 @@ AADSignInEventsBeta
 | summarize AttackerIPs = make_set(IPAddress), UserAgents = make_set(UserAgent),
     StartTime = min(Timestamp), EndTime = max(Timestamp), 
     Applications = make_set(Application) by SessionId
-| where IP contains "" // give the IP we got from Anomalous token alert
+| where AttackerIPs contains "" // give the IP we got from Anomalous token alert
